@@ -1,0 +1,903 @@
+:root {
+    --primary-clr: #009688;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    position: relative;
+    width: 1200px;
+    min-height: 850px;
+    margin: 0 auto;
+    padding: 5px;
+    color: #fff;
+    display: flex;
+    border-radius: 10px;
+    background-color: #00685d;
+}
+
+.left {
+    width: 60%;
+    padding: 20px;
+}
+
+.calendar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #878895;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.calendar::before,
+.calendar::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 12px;
+    height: 97%;
+    border-radius: 0 5px 5px 0;
+    background-color: #01b3a1;
+    transform: translateY(-50%);
+}
+
+.calendar::before {
+    height: 94%;
+    left: calc(100% + 12px);
+    background-color: #00d4bf;
+}
+
+.calendar .month {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.calendar .month .prev,
+.calendar .month .next {
+    cursor: pointer;
+}
+
+.calendar .month .prev:hover,
+.calendar .month .next:hover {
+    color: var(--primary-clr);
+}
+
+.calendar .weekdays {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.calendar .weekdays div {
+    width: 14.28%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar .days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.calendar .days .day {
+    width: 14.28%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--primary-clr);
+    border: 1px solid #f5f5f5;
+}
+
+.calendar .day:not(.prev-date, .next-date):hover {
+    color: #fff;
+    background-color: var(--primary-clr);
+}
+
+.calendar .days .prev-date,
+.calendar .days .next-date {
+    color: #b3b3b3;
+}
+
+.calendar .days .active {
+    position: relative;
+    font-size: 2rem;
+    color: #fff;
+    background-color: var(--primary-clr);
+}
+
+.calendar .days .active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px 2px var(--primary-clr);
+}
+
+.calendar .days .today {
+    font-size: 2rem;
+}
+
+.calendar .days .event {
+    position: relative;
+}
+
+.calendar .days .event::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 75%;
+    height: 6px;
+    border-radius: 30px;
+    transform: translateX(-50%);
+    background-color: var(--primary-clr);
+}
+
+.calendar .event:hover::after {
+    background-color: #fff;
+}
+
+.calendar .active.event::after {
+    background-color: #fff;
+    bottom: 20%;
+}
+
+.calendar .active.event {
+    padding-bottom: 10px;
+}
+
+.calendar .goto-today {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    color: var(--primary-clr);
+}
+
+.calendar .goto-today .goto {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--primary-clr);
+}
+
+.calendar .goto-today .goto input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 20px;
+    color: var(--primary-clr);
+    border-radius: 5px;
+}
+
+.calendar .goto-today button {
+    padding: 5px 10px;
+    border: 1px solid var(--primary-clr);
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--primary-clr);
+}
+
+.calendar .goto-today button:hover {
+    color: #fff;
+    background-color: var(--primary-clr);
+}
+
+.calendar .goto-today .goto button {
+    border: none;
+    border-left: 1px solid var(--primary-clr);
+    border-radius: 0;
+}
+
+.container .right {
+    position: relative;
+    width: 40%;
+    min-height: 100%;
+    padding: 20px 0;
+}
+
+.right .today-date {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    padding-left: 70px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+.today-date .event-day {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.today-date .event-date {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000000;
+}
+
+.events {
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.events .event {
+    position: relative;
+    width: 95%;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 20px;
+    padding-left: 50px;
+    color: #fff;
+    background: linear-gradient(90deg, #01b3a1, transparent);
+}
+
+.events .event:nth-child(even) {
+    background: transparent;
+}
+
+.events .event:hover {
+    background: linear-gradient(90deg, var(--primary-clr), transparent)
+}
+
+.events .event .title {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.events .event .title .event-title {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.events .event .title i {
+    color: var(--primary-clr);
+    font-size: 0.5rem;
+}
+
+.event .event:hover .title i ,
+.events .event:hover .event-time {
+    color: #fff;
+}
+
+.events .event .event-time {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #000000;
+    margin-left: 15px;
+    pointer-events: none;
+}
+
+.event::after {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-size: 3rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.3;
+    color: var(--primary-clr);
+    transform: translateY(-50%);
+}
+
+@media (max-width: 1000px){
+    body {
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .container {
+        min-height: 100vh;
+        flex-direction: column;
+        border-radius: 0;
+    }
+
+    .container .left,
+    .container .right {
+        width: 100%;
+        height: 100%;
+        padding: 20 0;
+    }
+
+    .calendar::before,
+    .calendar::after {
+        top: 100%;
+        left: 50%;
+        width: 97%;
+        height: 12px;
+        border-radius: 0 0 5px 5px;
+        transform: translateX(-50%);
+    }
+
+    .calendar::before {
+        width: 94%;
+        top: calc(100% + 12px);
+    }
+
+    .events {
+        padding-bottom: 340px;
+    }
+
+    .add-event-wrapper {
+        bottom: 100px;
+    }
+}
+
+@media (max-width: 500px) {
+    .calendar .month {
+        height: 75px;
+    }
+
+    .calendar .weekdays {
+        height: 50px;
+    }
+
+    .calendar .days .day {
+        height: 40px;
+        font-size: 0.8rem;
+    }
+
+    .calendar .days .day.active,
+    .calendar .days .day.today {
+        font-size: 1rem;
+    }
+
+    .right .today-date {
+        padding: 20px;
+    }
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(./img/sergio-bicheiro/main.png);
+    background-size: cover;
+    background-position: top;
+}
+
+.navbar {
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after{
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+.content h1 {
+    font-size: 70px;
+    margin-top: 80px;
+}
+
+.content p {
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+button .spanContainer {
+    background: #009688;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+button:hover .spanContainer {
+    width: 100%;
+}
+
+button:hover .spanContainer {
+    border: none;
+}
+
+input:hover {
+    width: 100%;
+}
+
+input:hover {
+    border: none;
+}
+
+.contact .row {
+    display: flex;
+    background: var(--black);
+    flex-wrap: wrap;
+    gap:1rem;
+}
+
+.contact .row .map {
+    flex: 1 1 45rem;
+    width: 100%;
+    object-fit: cover;
+    margin-left: 5rem;
+    margin-bottom: 4rem;
+}
+
+.contact .row form {
+    flex: 1 1 45rem;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.contact .row form h3 {
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    color: #fff;
+}
+
+.contact .row form .inputBox {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: var(--bg);
+    border: var(--border);
+}
+
+.contact .row form .inputBox span {
+    color: #fff;
+    font-size: 2rem;
+    padding-left: 2rem;
+}
+
+.contact .row form .inputBox input {
+    width: 100%;
+    padding: 2rem;
+    font-size: 1.7rem;
+    color: #fff;
+    text-transform: none;
+    background: none;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    font-size: 70px;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+input[type="submit"] {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.bannerFotos {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(./img/sergio-bicheiro/main.png);
+    background-size: cover;
+    background-position: top;
+}
+
+.containerFotos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.containerFotos .headingFotos {
+    width: 50%;
+    padding-bottom: 50px;
+}
+
+.containerFotos .headingFotos h3{
+    font-size: 3em;
+    font-weight: bolder;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #009688;
+    color: #fff;
+}
+
+.containerFotos .headingFotos h3 span{
+    font-weight: 100;
+}
+
+.containerFotos .box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.containerFotos .box .dream {
+    display: flex;
+    flex-direction: column;
+    width: 33.3%;
+}
+
+.containerFotos .box .dream img {
+    width: 100%;
+    padding: 15px;
+}
+
+@media only screen and (max-width: 643px) {
+    .containerFotos .headingFotos {
+        width: 100%;
+    }
+    
+    .containerFotos .headingFotos h3{
+        font-size: 1em;
+    }
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+footer {
+    height: 30px;
+}
+
+.containerLetra {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
+.letraBackground {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    border-radius: 20px;
+    padding-left: 10%;
+    font-size: 1em;
+    color: #fff;
+}
+
+.chorus {
+    text-transform: capitalize;
+    line-height: 20px
+}
+
+.timeline {
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 700px;
+    position: relative;
+}
+
+.timeline__content-title {
+    font-weight: normal;
+    font-size: 66px;
+    margin: -10px 0 0 0;
+    transition: 0.4s;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-family: "Pathway Gothic One", sans-serif;
+    color: #fff;
+}
+
+.timeline__content-desc {
+    margin: 0;
+    font-size: 18px;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: Cardo;
+    font-weight: normal;
+    line-height: 25px;
+}
+
+.timeline::before {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+    content: "";
+    background: #009688;
+}
+
+@media only screen and (max-width: 767px) {
+    .timeline::before {
+        left: 40px;
+    }
+}
+
+.timeline-item {
+    padding: 40px 0;
+    opacity: 1;
+    transition: 0.5s;
+    box-sizing: border-box;
+    width: calc(50% - 40px);
+    display: flex;
+    position: relative;
+    transform: translateY(-80px);
+}
+
+.timeline-item::before {
+    content: attr(data-text);
+    letter-spacing: 3px;
+    width: 100%;
+    position: absolute;
+    color: #009688;
+    font-size: 18px;
+    font-family: "Pathway Gothic One", sans-serif;
+    border-left: 2px solid #009688;
+    top: 70%;
+    margin-top: -5px;
+    padding-left: 15px;
+    opacity: 0;
+    right: calc(-100% -56px);
+}
+
+.timeline-item:nth-child(even) {
+    align-self: flex-end;
+}
+
+.timeline-item:nth-child(even)::before {
+    right: auto;
+    text-align: right;
+    left: calc(-100% - 56px);
+    padding-left: 0;
+    border-left: none;
+    border-right: 2px solid #009688;
+    padding-right: 15px;
+}
+
+.timeline-item div:target {
+    opacity: 1;
+}
+
+.timeline-item-active::before {
+    top: 50%;
+    transition: 0.3s all 0.2s;
+    opacity: 1;
+}
+
+.timeline-item--active .timeline__content-title {
+    margin: -50px 0 20px 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .timeline-item {
+        align-self: baseline !important;
+        width: 100%;
+        padding: 0 30px 150px 80px;
+    }
+    
+    .timeline-item::before {
+        left: 10px !important;
+        padding: 0 !important;
+        top: 50px;
+        text-align: center !important;
+        width: 60px;
+        border: none !important;
+    }
+
+    .timeline-item:last-child {
+        padding-bottom: 40px;
+    }
+}
+
+.timeline__img {
+    max-width: 100%;
+    box-shadow: 0 10px 15px #009688;
+}
+
+.timeline-container {
+    width: 100%;
+    position: relative;
+    padding: 80px 0;
+    transition: 0.3s ease 0s;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.onClickTextOverImage {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    display: inline-block;
+    margin: 4px;
+    border-radius: 16px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.onClickTextOverImage * {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.onClickTextOverImage div {
+    z-index: 1;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    padding-top: 35%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.onClickTextOverImage div:target {
+    opacity: 1;
+    padding-top: 40%;
+}
+
+.foto1 {
+    background-image: url(./img/sergio-bicheiro/foto1.jpeg);
+}
+
+.foto2 {
+    background-image: url(./img/sergio-bicheiro/foto2.jpeg);
+}
+
+.foto3 {
+    background-image: url(./img/sergio-bicheiro/foto3.jpeg);
+}
+
+.foto4 {
+    background-image: url(./img/sergio-bicheiro/foto4.jpeg);
+}
+
+.foto5 {
+    background-image: url(./img/sergio-bicheiro/foto5.jpeg);
+}
+
+.foto6 {
+    background-image: url(./img/sergio-bicheiro/foto6.jpeg);
+}
+
+.foto7 {
+    background-image: url(./img/sergio-bicheiro/foto7.png);
+}
+
+.foto8 {
+    background-image: url(./img/sergio-bicheiro/foto8.jpeg);
+}
+
+.foto9 {
+    background-image: url(./img/sergio-bicheiro/foto9.jpeg);
+}
