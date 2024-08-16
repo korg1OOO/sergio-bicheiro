@@ -420,7 +420,7 @@ body {
 
 .banner {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(./img/sergio-bicheiro/main.png);
     background-size: cover;
     background-position: top;
@@ -538,6 +538,7 @@ input:hover {
     width: 100%;
     object-fit: cover;
     margin-left: 5rem;
+    margin-right: 5rem;
     margin-bottom: 4rem;
 }
 
